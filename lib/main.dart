@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/ButtonSection.dart';
 import 'package:flutter_example/TitleSection.dart';
 
 void main() {
@@ -113,7 +114,8 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const TitleSection(name: "name", location: "location")
+            const TitleSection(name: "name", location: "location"),
+            const ButtonSection()
           ],
         ),
       ),
