@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/ButtonSection.dart';
+import 'package:flutter_example/ImageSection.dart';
 import 'package:flutter_example/TextSection.dart';
 import 'package:flutter_example/TitleSection.dart';
 
@@ -115,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const ImageSection(image: 'images/lake.jpg'),
             const TitleSection(name: "name", location: "location"),
             const ButtonSection(),
             const TextSection(
