@@ -35,7 +35,31 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: const Text('Flutter Demo Home Page'),
+            ),
+            body: const MyHomePage(title: 'Flutter Demo Home Page'),
+            bottomNavigationBar: BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.directions_car),
+                  label: 'Item 1',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.directions_transit),
+                  label: 'Item 2',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.directions_bike),
+                  label: 'Item 3',
+                )
+              ],
+            ),
+          )),
     );
   }
 }
@@ -81,15 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: SingleChildScrollView(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
