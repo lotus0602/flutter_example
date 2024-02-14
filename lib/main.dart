@@ -1,50 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/ButtonSection.dart';
-import 'package:flutter_example/ImageSection.dart';
-import 'package:flutter_example/TextSection.dart';
-import 'package:flutter_example/TitleSection.dart';
+import 'package:flutter_example/screens/tutorial/widget/button_section.dart';
+import 'package:flutter_example/screens/tutorial/widget/image_section.dart';
+import 'package:flutter_example/screens/tutorial/widget/text_section.dart';
+import 'package:flutter_example/screens/tutorial/widget/title_section.dart';
+import 'package:flutter_example/screens/empty.dart';
+import 'package:flutter_example/screens/home.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State createState() => _MyApp();
+}
+
+class _MyApp extends State<MyApp> {
+  int _selectedIndex = 0;
+  final List<Widget> _bottomNavWidgets = [
+    const Home(),
+    const Empty(),
+    const Empty(),
+  ];
+
+  void onBottomNavTab(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              title: const Text('Flutter Demo Home Page'),
-            ),
-            body: const MyHomePage(title: 'Flutter Demo Home Page'),
-            bottomNavigationBar: BottomNavigationBar(
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.directions_car),
-                  label: 'Item 1',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.directions_transit),
-                  label: 'Item 2',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.directions_bike),
-                  label: 'Item 3',
-                )
-              ],
-            ),
-          )),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: const Text('Flutter Demo Home Page'),
+          ),
+          body: _bottomNavWidgets.elementAt(_selectedIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.directions_transit),
+                label: 'Item 2',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.directions_bike),
+                label: 'Item 3',
+              )
+            ],
+            onTap: onBottomNavTab,
+            currentIndex: _selectedIndex,
+          ),
+        ));
   }
 }
 
