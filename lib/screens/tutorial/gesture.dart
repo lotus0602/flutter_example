@@ -10,7 +10,12 @@ class GestureDemo extends StatelessWidget {
         title: const Text('Gesture Demo'),
       ),
       body: const Center(
-        child: ButtonWithSnackBar(),
+        child: Column(
+          children: [
+            ButtonWithSnackBar(),
+            RippleButtonWithSnackBar(),
+          ],
+        ),
       ),
     );
   }
@@ -23,8 +28,9 @@ class ButtonWithSnackBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        const snackBar = SnackBar(content: Text('tapped!!'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('tapped!!')),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -33,6 +39,25 @@ class ButtonWithSnackBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: const Text('Show Snack Bar'),
+      ),
+    );
+  }
+}
+
+class RippleButtonWithSnackBar extends StatelessWidget {
+  const RippleButtonWithSnackBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('tapped!!')),
+        );
+      },
+      child: const Padding(
+        padding: EdgeInsets.all(12),
+        child: Text('ripple button'),
       ),
     );
   }
