@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/screens/tutorial/gesture.dart';
 import 'package:flutter_example/screens/tutorial/increment_counter.dart';
 import 'package:flutter_example/screens/tutorial/tutorial.dart';
 
@@ -36,6 +37,19 @@ class Home extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const LayoutDemo(),
+                  ))
+            },
+          ),
+          TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.grey),
+            ),
+            child: const Text('Gesture Demo'),
+            onPressed: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GestureDemo(),
                   ))
             },
           ),
