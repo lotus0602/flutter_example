@@ -14,6 +14,7 @@ class GestureDemo extends StatelessWidget {
           children: [
             ButtonWithSnackBar(),
             RippleButtonWithSnackBar(),
+            DismissList()
           ],
         ),
       ),
@@ -58,6 +59,44 @@ class RippleButtonWithSnackBar extends StatelessWidget {
       child: const Padding(
         padding: EdgeInsets.all(12),
         child: Text('ripple button'),
+      ),
+    );
+  }
+}
+
+class DismissList extends StatefulWidget {
+  const DismissList({super.key});
+
+  @override
+  State<DismissList> createState() => _DismissListState();
+}
+
+class _DismissListState extends State<DismissList> {
+  List<String> items = List.generate(50, (index) => 'item $index');
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Dismissible(
+            key: Key(item),
+            onDismissed: (direction) {
+              setState(() {
+                items.removeAt(index);
+              });
+
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('$item dismissed')));
+            },
+            background: Container(color: Colors.red),
+            child: ListTile(
+              title: Text(items[index]),
+            ),
+          );
+        },
       ),
     );
   }
